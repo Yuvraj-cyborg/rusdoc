@@ -21,12 +21,19 @@ fn render_rich(item: &DocItem<'_>) -> String {
     let kind = item_kind_label(item.inner);
     let path = item.path.join("::");
     out.push_str(&format!(" {} {}\n", kind.dimmed(), path.bold().cyan()));
-    out.push_str(&format!(" {}\n", "─".repeat(width.saturating_sub(2).min(path.len() + kind.len() + 2))));
+    out.push_str(&format!(
+        " {}\n",
+        "─".repeat(width.saturating_sub(2).min(path.len() + kind.len() + 2))
+    ));
     out.push('\n');
 
     if let Some(dep) = &item.deprecation {
         let note = dep.note.as_deref().unwrap_or("deprecated");
-        out.push_str(&format!("  {} {}\n\n", "DEPRECATED:".yellow().bold(), note.yellow()));
+        out.push_str(&format!(
+            "  {} {}\n\n",
+            "DEPRECATED:".yellow().bold(),
+            note.yellow()
+        ));
     }
 
     if let Some(docs) = &item.docs {
@@ -173,7 +180,10 @@ fn render_plain(item: &DocItem<'_>) -> String {
     let kind = item_kind_label(item.inner);
     let path = item.path.join("::");
     out.push_str(&format!(" {kind} {path}\n"));
-    out.push_str(&format!(" {}\n", "-".repeat(width.saturating_sub(2).min(path.len() + kind.len() + 2))));
+    out.push_str(&format!(
+        " {}\n",
+        "-".repeat(width.saturating_sub(2).min(path.len() + kind.len() + 2))
+    ));
     out.push('\n');
 
     if let Some(dep) = &item.deprecation {

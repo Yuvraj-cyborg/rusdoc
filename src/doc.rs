@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
-use fuzzy_matcher::skim::SkimMatcherV2;
 use fuzzy_matcher::FuzzyMatcher;
+use fuzzy_matcher::skim::SkimMatcherV2;
 use rustdoc_types::{Crate, Id, ItemEnum};
 
 /// A parsed and indexed documentation set ready for searching.

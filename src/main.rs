@@ -4,7 +4,7 @@ use owo_colors::OwoColorize;
 use rusdoc::cache::Cache;
 use rusdoc::cli::{CacheAction, Cli, Commands};
 use rusdoc::render::render_item;
-use rusdoc::resolver::{format_disambiguation, resolve, ResolveResult};
+use rusdoc::resolver::{ResolveResult, format_disambiguation, resolve};
 use rusdoc::source::DocSource;
 
 fn main() -> anyhow::Result<()> {

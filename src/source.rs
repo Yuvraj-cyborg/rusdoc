@@ -22,11 +22,7 @@ impl DocSource {
             return DocSource::LocalProject { manifest_dir };
         }
 
-        let crate_name = query
-            .split("::")
-            .next()
-            .unwrap_or(query)
-            .to_lowercase();
+        let crate_name = query.split("::").next().unwrap_or(query).to_lowercase();
 
         DocSource::Remote {
             name: crate_name,
@@ -91,12 +87,11 @@ fn fetch_remote(name: &str, version: &str) -> Result<Vec<u8>> {
             reason: format!("download error: {e}"),
         })?;
 
-    let decompressed = zstd::stream::decode_all(compressed.as_slice()).map_err(|e| {
-        RusdocError::FetchFailed {
+    let decompressed =
+        zstd::stream::decode_all(compressed.as_slice()).map_err(|e| RusdocError::FetchFailed {
             name: name.to_string(),
             reason: format!("decompression error: {e}"),
-        }
-    })?;
+        })?;
 
     Ok(decompressed)
 }
